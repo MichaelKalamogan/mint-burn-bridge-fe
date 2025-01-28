@@ -39,19 +39,13 @@ const BurnTokens = () => {
 				<select value={network} onChange={(e) => setNetwork(e.target.value)}>
 					<option value="">Select network</option>
 					<option value="ARBITRUM">ARBITRUM</option>
-					<option value="SEPOLIA">SEPOLIA</option>
+					<option value="SEPOLIA">OPTIMISM</option>
 				</select>
 			</div>
 
 			<div className="mb-4">
 				<label>Amount</label>
-				<input
-					type="number"
-					value={amount}
-					onChange={(e) => setAmount(e.target.value)}
-					placeholder="Enter amount to burn"
-					className="input"
-				/>
+				<input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount to burn" className="input" />
 			</div>
 
 			<button onClick={handleBurn} className="button" disabled={loading}>
