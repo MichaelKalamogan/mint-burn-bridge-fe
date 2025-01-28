@@ -4,11 +4,17 @@ import axios from "axios";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const BridgeTransactions = () => {
+	const [status, setStatus] = useState("");
 	const [transactions, setTransactions] = useState([]);
 
 	const fetchTransactions = async () => {
+		let url = backendUrl;
 		try {
-			const response = await axios.get(backendUrl);
+			if (status) {
+				url += `?status=${status}`;
+			}
+
+			const response = await axios.get(url);
 			setTransactions(response.data.transactions);
 		} catch (err) {
 			console.error("Failed to fetch", err);
@@ -18,6 +24,17 @@ const BridgeTransactions = () => {
 	return (
 		<div>
 			<h1>Bridge Transactions</h1>
+			<div>
+				<label>Status</label>
+				<select value={status} onChange={(e) => setStatus(e.target.value)}>
+					<option value="">Select status (optional)</option>
+					<option value="PROCESSING">PROCESSING</option>
+					<option value="MINTED">MINTED</option>
+					<option value="RELAYED">RELAYED</option>
+					<option value="COMPLETED">COMPLETED</option>
+					<option value="FAILED">FAILED</option>
+				</select>
+			</div>
 
 			<button onClick={fetchTransactions}>Fetch Transactions</button>
 
