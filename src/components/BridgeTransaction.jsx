@@ -6,8 +6,10 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const BridgeTransactions = () => {
 	const [status, setStatus] = useState("");
 	const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 	const fetchTransactions = async () => {
+		setLoading(true);
 		let url = backendUrl;
 		try {
 			if (status) {
@@ -18,6 +20,8 @@ const BridgeTransactions = () => {
 			setTransactions(response.data.transactions);
 		} catch (err) {
 			console.error("Failed to fetch", err);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -38,6 +42,7 @@ const BridgeTransactions = () => {
 
 			<button onClick={fetchTransactions}>Fetch Transactions</button>
 
+			{loading && <p className="mt-4">Loading...</p>}
 			<div>
 				{transactions.length > 0 ? (
 					<table>
