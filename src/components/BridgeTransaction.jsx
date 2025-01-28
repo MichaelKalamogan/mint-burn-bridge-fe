@@ -9,7 +9,7 @@ const BridgeTransactions = () => {
 	const fetchTransactions = async () => {
 		try {
 			const response = await axios.get(backendUrl);
-			setTransactions(response.data);
+			setTransactions(response.data.transactions);
 		} catch (err) {
 			console.error("Failed to fetch", err);
 		}
