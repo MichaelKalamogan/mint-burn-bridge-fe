@@ -4,7 +4,7 @@ import "./BridgeTransactions.css"; // Reusing the same CSS file
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const BurnTokens = () => {
+const BurnTokens = ({ fetchTransactions }) => {
 	const [network, setNetwork] = useState("");
 	const [amount, setAmount] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -22,6 +22,7 @@ const BurnTokens = () => {
 		try {
 			const response = await axios.post(`${backendUrl}/burn`, { network, amount });
 			setMessage(`Burn successful: ${response.data.message}`);
+			fetchTransactions();
 		} catch (err) {
 			console.error("Burn failed", err);
 			setMessage("Failed to burn tokens. Please try again.");

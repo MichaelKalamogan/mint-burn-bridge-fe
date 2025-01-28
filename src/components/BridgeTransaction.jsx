@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./BridgeTransactions.css"; // Import the CSS file
+import BurnTokens from "./BurnTokens";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -84,6 +85,9 @@ const BridgeTransactions = () => {
 					<p className="no-transactions">No transactions found.</p>
 				)}
 			</div>
+			<br></br>
+
+			<BurnTokens fetchTransactions={fetchTransactions} />
 		</div>
 	);
 };
