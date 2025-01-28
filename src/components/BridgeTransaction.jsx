@@ -30,9 +30,16 @@ const BridgeTransactions = () => {
 		<div className="container">
 			<h1 className="title">Bridge Transactions</h1>
 
-			<div className="input-group">
-				<label className="label">Status</label>
-				<input type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="Enter status (optional)" className="input" />
+			<div>
+				<label>Status</label>
+				<select value={status} onChange={(e) => setStatus(e.target.value)}>
+					<option value="">Select status (optional)</option>
+					<option value="PROCESSING">PROCESSING</option>
+					<option value="MINTED">MINTED</option>
+					<option value="RELAYED">RELAYED</option>
+					<option value="COMPLETED">COMPLETED</option>
+					<option value="FAILED">FAILED</option>
+				</select>
 			</div>
 
 			<button onClick={fetchTransactions} className="button">
