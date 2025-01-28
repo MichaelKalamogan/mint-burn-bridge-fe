@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import "./BridgeTransactions.css"; // Import the CSS file
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const BridgeTransactions = () => {
 	const [status, setStatus] = useState("");
 	const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const fetchTransactions = async () => {
 		setLoading(true);
@@ -26,26 +27,23 @@ const BridgeTransactions = () => {
 	};
 
 	return (
-		<div>
-			<h1>Bridge Transactions</h1>
-			<div>
-				<label>Status</label>
-				<select value={status} onChange={(e) => setStatus(e.target.value)}>
-					<option value="">Select status (optional)</option>
-					<option value="PROCESSING">PROCESSING</option>
-					<option value="MINTED">MINTED</option>
-					<option value="RELAYED">RELAYED</option>
-					<option value="COMPLETED">COMPLETED</option>
-					<option value="FAILED">FAILED</option>
-				</select>
+		<div className="container">
+			<h1 className="title">Bridge Transactions</h1>
+
+			<div className="input-group">
+				<label className="label">Status</label>
+				<input type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="Enter status (optional)" className="input" />
 			</div>
 
-			<button onClick={fetchTransactions}>Fetch Transactions</button>
+			<button onClick={fetchTransactions} className="button">
+				Fetch Transactions
+			</button>
 
-			{loading && <p className="mt-4">Loading...</p>}
-			<div>
+			{loading && <p className="loading">Loading...</p>}
+
+			<div className="table-container">
 				{transactions.length > 0 ? (
-					<table>
+					<table className="table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -76,7 +74,7 @@ const BridgeTransactions = () => {
 						</tbody>
 					</table>
 				) : (
-					<p>No transactions found.</p>
+					<p className="no-transactions">No transactions found.</p>
 				)}
 			</div>
 		</div>
